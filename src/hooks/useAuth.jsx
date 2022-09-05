@@ -1,16 +1,26 @@
 import useAsyncStorage from './useAsyncStorage'
 import { getUserLoginInfo } from '../_services/authService'
+import { useDispatch } from 'react-redux'
+import { setSessionInfo } from '../_rx/user/userSlice'
 
 export default function useAuth () {
-  const { getItem } = useAsyncStorage()
+  const dispatch = useDispatch()
+  const { getItem, removeItem } = useAsyncStorage()
 
-  const imLogged = async () => {
+  const checkSessionAvailable = async () => {
     const userToken = await getItem('@token')
-    // if (!userToken) return false
+    if (!userToken) return false
 
-    const userInfo = await getUserLoginInfo({ token: 'asd' })
-    console.log(userInfo)
+    getUserLoginInfo({ token: userToken })
+      .then(async response => {
+        dispatch(setSessionInfo(response))
+        return response
+      })
+      .catch(async (error) => {
+        await removeItem('@token')
+        console.warn(error)
+      })
   }
 
-  return { imLogged }
+  return { checkSessionAvailable }
 }

@@ -5,26 +5,32 @@ import { StatusBar } from 'expo-status-bar'
 import Login from './screens/login/login'
 import Home from './screens/home/home'
 import useAuth from './hooks/useAuth'
+import { useSelector } from 'react-redux'
 const Stack = createNativeStackNavigator()
 
 export default function Main () {
-  const { imLogged } = useAuth()
+  const { checkSessionAvailable } = useAuth()
+  const userSessionInfo = useSelector(({ user }) => user.sessionInfo)
 
   useEffect(() => {
-    imLogged()
+    checkSessionAvailable()
   }, [])
 
   return (
     <NavigationContainer >
       <StatusBar style='light' />
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName={userSessionInfo ? 'Home' : 'Login'}
         screenOptions={{
           headerShown: false,
           animation: 'none'
         }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
+        { !userSessionInfo
+          ? <Stack.Screen name="Login" component={Login} />
+          : <>
+            <Stack.Screen name="Home" component={Home} />
+          </>
+        }
       </Stack.Navigator>
     </NavigationContainer>
   )
