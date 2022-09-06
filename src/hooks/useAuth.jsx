@@ -1,11 +1,11 @@
 import useAsyncStorage from './useAsyncStorage'
-import { getUserLoginInfo } from '../_services/authService'
+import { getUserLoginInfo, postUserLogin } from '../_services/authService'
 import { useDispatch } from 'react-redux'
 import { setSessionInfo } from '../_rx/user/userSlice'
 
 export default function useAuth () {
   const dispatch = useDispatch()
-  const { getItem, removeItem } = useAsyncStorage()
+  const { setItem, getItem, removeItem } = useAsyncStorage()
 
   const checkSessionAvailable = async () => {
     const userToken = await getItem('@token')
@@ -22,5 +22,13 @@ export default function useAuth () {
       })
   }
 
-  return { checkSessionAvailable }
+  const loginUser = async ({ userMail, password }) => {
+    postUserLogin({ userMail, password })
+      .then(async response => {
+        dispatch(setSessionInfo(response))
+        await setItem('@token', response.authToken)
+      })
+  }
+
+  return { checkSessionAvailable, loginUser }
 }

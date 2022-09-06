@@ -4,6 +4,8 @@ import Button from '../../components/Button'
 import { AntDesign } from '@expo/vector-icons'
 import InputFormik from '../../components/forms/InputFormik'
 import { Formik } from 'formik'
+import useAuth from '../../hooks/useAuth'
+import { useNavigation } from '@react-navigation/native'
 
 const initialValues = {
   email: '',
@@ -11,8 +13,12 @@ const initialValues = {
 }
 
 export default function Login () {
+  const navigation = useNavigation()
+  const { loginUser } = useAuth()
   const handleSubmit = (values) => {
-    console.log(values)
+    loginUser({ userMail: values.email.toLowerCase(), password: values.password })
+      .then(() => navigation.navigate('Home'))
+      .catch(error => console.log(error))
   }
 
   return (
