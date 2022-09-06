@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Login from './screens/login/login'
+import LoginHome from './screens/login/LoginHome'
 import Home from './screens/home/home'
 import useAuth from './hooks/useAuth'
 import { useSelector } from 'react-redux'
@@ -24,7 +24,7 @@ export default function Main () {
           animation: 'none'
         }}>
         { !userSessionInfo
-          ? <Stack.Screen name="Login" component={Login} />
+          ? <Stack.Screen name="Login" component={LoginHome} />
           : <>
             <Stack.Screen name="Home" component={Home} />
           </>
