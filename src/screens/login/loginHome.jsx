@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import theme from '../../../theme'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Animated } from 'react-native'
 import Layout from '../../components/Layout'
 import DismissKeyboard from '../../components/DimissKeyboard'
 import Button from '../../components/Button'
@@ -9,19 +9,34 @@ import { VIEW_LOGIN_HOME, VIEW_LOGIN_LOGIN, VIEW_LOGIN_SIGNUP } from '../../cons
 import SignUp from './signUp'
 import Login from './login'
 import { setViewStatus } from '../../_rx/login/loginSlice'
+import useAnimation from '../../hooks/useAnimation'
 
 export default function LoginHome () {
+  const [logoAnimation, logoAnimationValue] = useAnimation('50%', '10%')
   const status = useSelector(state => state.login.viewStatus)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (status !== VIEW_LOGIN_HOME) {
+      Animated.timing(logoAnimation, {
+        toValue: 1,
+        duration: 200
+      }).start()
+    }
+  }, [status])
+
   return (
     <DismissKeyboard>
       <Layout style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.content.title}>
+          <Animated.View style={{
+            ...styles.content.title,
+            marginTop: logoAnimationValue
+          }}>
             <Text style={styles.title}>
               BAD CO.
             </Text>
-          </View>
+          </Animated.View>
           { status === VIEW_LOGIN_LOGIN && <Login /> }
           { status === VIEW_LOGIN_SIGNUP && <SignUp /> }
           { status === VIEW_LOGIN_HOME &&
