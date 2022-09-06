@@ -5,11 +5,12 @@ import LoginHome from './screens/login/loginHome'
 import Home from './screens/home/home'
 import useAuth from './hooks/useAuth'
 import { useSelector } from 'react-redux'
+import EmptyComponent from './components/EmptyComponent'
 const Stack = createNativeStackNavigator()
 
 export default function Main () {
   const { checkSessionAvailable } = useAuth()
-  const userSessionInfo = useSelector(({ user }) => user.sessionInfo)
+  const sessionInfo = useSelector(({ user }) => user.sessionInfo)
 
   useEffect(() => {
     checkSessionAvailable()
@@ -18,14 +19,19 @@ export default function Main () {
   return (
     <NavigationContainer >
       <Stack.Navigator
-        initialRouteName={userSessionInfo ? 'Home' : 'Login'}
+        initialRouteName={sessionInfo.data ? 'Home' : 'Login'}
         screenOptions={{
           headerShown: false,
           animation: 'none'
         }}>
-        { !userSessionInfo
-          ? <Stack.Screen name="Login" component={LoginHome} />
-          : <>
+        {sessionInfo.isLoading &&
+          <Stack.Screen name="Loading" component={EmptyComponent} />
+        }
+        { !sessionInfo.data && !sessionInfo.isLoading &&
+          <Stack.Screen name="Login" component={LoginHome} />
+        }
+        { sessionInfo.data && !sessionInfo.isLoading &&
+          <>
             <Stack.Screen name="Home" component={Home} />
           </>
         }
