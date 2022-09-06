@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import InputFormik from '../../components/forms/InputFormik'
 import { AntDesign } from '@expo/vector-icons'
 import Button from '../../components/Button'
+import useAuth from '../../hooks/useAuth'
 
 const initialValues = {
   email: '',
@@ -12,8 +13,10 @@ const initialValues = {
 }
 
 export default function SignUp () {
+  const { createUser } = useAuth()
+
   const handleSubmit = (values) => {
-    console.log(values)
+    createUser({ userMail: values.email, name: values.userName, ...values })
   }
 
   return (
