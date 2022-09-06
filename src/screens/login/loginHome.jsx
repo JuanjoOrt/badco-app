@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import theme from '../../../theme'
 import { Text, View, StyleSheet } from 'react-native'
 import Layout from '../../components/Layout'
@@ -29,7 +29,7 @@ export default function LoginHome () {
               <Button
                 color='primary'
                 onPress={() => dispatch(setViewStatus(VIEW_LOGIN_LOGIN))}
-              >Login</Button>
+              >Log in</Button>
               <Button
                 onPress={() => dispatch(setViewStatus(VIEW_LOGIN_SIGNUP))}
               >Sign up</Button>
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   content: {
     width: '80%',
     height: '80%',
-    paddingTop: '30%',
     title: {
       width: '100%',
       alignItems: 'center'
@@ -62,6 +61,6 @@ const styles = StyleSheet.create({
     color: '#6c60a8'
   },
   buttonSection: {
-    height: '70%'
+    height: '20%'
   }
 })

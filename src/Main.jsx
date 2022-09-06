@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import LoginHome from './screens/login/LoginHome'
+import LoginHome from './screens/login/loginHome'
 import Home from './screens/home/home'
 import useAuth from './hooks/useAuth'
 import { useSelector } from 'react-redux'

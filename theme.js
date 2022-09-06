@@ -5,6 +5,6 @@ export default {
     }
   },
   color: {
-    primary: '#978DD0'
+    primary: '#8379C7FF'
   }
 }
