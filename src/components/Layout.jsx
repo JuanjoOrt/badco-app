@@ -1,6 +1,6 @@
 import React from 'react'
 import Constants from 'expo-constants'
-import { StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 
 export default function Layout ({ children, style, appBarStyle = 'auto' }) {
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   content: {
-    flex: 1
+    flex: 1,
+    height: Dimensions.get('window').height - Constants.statusBarHeight
   }
 })
