@@ -16,7 +16,7 @@ export default function SignUp () {
   const { createUser } = useAuth()
 
   const handleSubmit = (values) => {
-    createUser({ userMail: values.email, name: values.userName, ...values })
+    createUser({ userMail: values.email.toLowerCase(), name: values.userName, ...values })
   }
 
   return (
