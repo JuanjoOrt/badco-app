@@ -1,8 +1,11 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import theme from '../../theme'
+import { AntDesign } from '@expo/vector-icons'
+import useAnimation from '../hooks/useAnimation'
 
-export default function Button ({ children, color, onPress }) {
+export default function Button ({ children, color, onPress, isLoading }) {
+  const [animation, animationInterpolate] = useAnimation('0deg', '360deg')
   const styles = [
     stylesDefault.button,
     color === 'primary' && stylesDefault.button.primary
@@ -10,13 +13,32 @@ export default function Button ({ children, color, onPress }) {
 
   const stylesFont = [
     stylesDefault.font,
-    color === 'primary' && stylesDefault.font.primary
-  ]
+    color === 'primary' && stylesDefault.font.primary,
+    { display: isLoading ? 'none' : 'flex' }
+]
+
+  const handlePress = () => {
+    if (onPress && !isLoading) onPress()
+  }
+
+  useEffect(() => {
+    Animated.loop(Animated.timing(animation, {
+      toValue: 1,
+      useNativeDriver: false
+    })).start()
+  }, [])
 
   return (
     <View>
-      <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.8} style={styles}>
         <View style={stylesDefault.content}>
+          <Animated.View
+            style={{
+              transform: [{ rotate: animationInterpolate }],
+              display: isLoading ? 'flex' : 'none'
+            }}>
+            <AntDesign name="loading1" size={22} color='white'/>
+          </Animated.View>
           <Text style={stylesFont}>{children}</Text>
         </View>
       </TouchableOpacity>

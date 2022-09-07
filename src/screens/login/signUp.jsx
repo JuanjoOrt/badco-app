@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Formik } from 'formik'
 import InputFormik from '../../components/forms/InputFormik'
@@ -13,10 +13,16 @@ const initialValues = {
 }
 
 export default function SignUp () {
+  const [isLoading, setIsLoading] = useState(false)
   const { createUser } = useAuth()
 
   const handleSubmit = (values) => {
+    setIsLoading(true)
     createUser({ userMail: values.email.toLowerCase(), name: values.userName, ...values })
+      .catch(error => {
+        console.error(error)
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -47,7 +53,7 @@ export default function SignUp () {
             />
           </View>
           <View style={styles.container.button}>
-            <Button color='primary' onPress={handleSubmit}>Sign up</Button>
+            <Button color='primary' onPress={handleSubmit} isLoading={isLoading}>Sign up</Button>
           </View>
         </View>
       )}

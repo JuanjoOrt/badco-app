@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Button from '../../components/Button'
 import { AntDesign } from '@expo/vector-icons'
@@ -13,9 +13,15 @@ const initialValues = {
 
 export default function Login () {
   const { loginUser } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleSubmit = (values) => {
+    setIsLoading(true)
     loginUser({ userMail: values.email.toLowerCase(), password: values.password })
-      .catch(error => console.log(error))
+      .catch(error => {
+        setIsLoading(false)
+        console.error(error)
+      })
   }
 
   return (
@@ -39,7 +45,7 @@ export default function Login () {
             />
           </View>
           <View style={styles.container.button}>
-            <Button color='primary' onPress={handleSubmit}>Log in</Button>
+            <Button color='primary' onPress={handleSubmit} isLoading={isLoading}>Log in</Button>
           </View>
         </View>
       )}

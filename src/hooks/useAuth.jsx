@@ -28,7 +28,7 @@ export default function useAuth () {
   }
 
   const loginUser = async ({ userMail, password }) => {
-    postUserLogin({ userMail, password })
+    return postUserLogin({ userMail, password })
       .then(async response => {
         dispatch(setSessionData(response))
         await setItem('@token', response.authToken)
@@ -36,7 +36,7 @@ export default function useAuth () {
   }
 
   const createUser = async ({ userMail, password, name }) => {
-    await postNewUser({ userMail, password, name })
+    return postNewUser({ userMail, password, name })
       .then(async response => {
         dispatch(setSessionData(response))
         await setItem('@token', response.authToken)

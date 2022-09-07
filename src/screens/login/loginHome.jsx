@@ -10,6 +10,7 @@ import SignUp from './signUp'
 import Login from './login'
 import { setViewStatus } from '../../_rx/login/loginSlice'
 import useAnimation from '../../hooks/useAnimation'
+import Constants from 'expo-constants'
 
 export default function LoginHome () {
   const [logoAnimation, logoAnimationValue] = useAnimation('50%', '10%')
@@ -20,14 +21,15 @@ export default function LoginHome () {
     if (status !== VIEW_LOGIN_HOME) {
       Animated.timing(logoAnimation, {
         toValue: 1,
-        duration: 200
+        duration: 200,
+        useNativeDriver: false
       }).start()
     }
   }, [status])
 
   return (
     <DismissKeyboard>
-      <Layout style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.content}>
           <Animated.View style={{
             ...styles.content.title,
@@ -51,13 +53,14 @@ export default function LoginHome () {
             </View>
           }
         </View>
-      </Layout>
+      </View>
     </DismissKeyboard>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     alignItems: 'center',
     justifyContent: 'center'
   },
