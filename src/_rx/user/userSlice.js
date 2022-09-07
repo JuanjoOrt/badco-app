@@ -5,7 +5,8 @@ const initialState = {
     data: null,
     isLoading: false,
     error: null
-  }
+  },
+  isInputSearchOpen: false
 }
 
 export const userSlice = createSlice({
@@ -20,10 +21,13 @@ export const userSlice = createSlice({
     },
     setSessionError: (state, action) => {
       state.sessionInfo.error = action.payload
+    },
+    setInputSearchOpen: (state, action) => {
+      state.isInputSearchOpen = action.payload
     }
   }
 })
 
-export const { setSessionData, setSessionLoading, setSessionError } = userSlice.actions
+export const { setSessionData, setSessionLoading, setSessionError, setInputSearchOpen } = userSlice.actions
 
 export default userSlice.reducer

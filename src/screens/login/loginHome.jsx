@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import theme from '../../../theme'
 import { Text, View, StyleSheet, Animated } from 'react-native'
-import Layout from '../../components/Layout'
 import DismissKeyboard from '../../components/DimissKeyboard'
 import Button from '../../components/Button'
 import { useDispatch, useSelector } from 'react-redux'
