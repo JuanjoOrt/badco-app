@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableWithoutFeedback, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import theme from '../../theme'
 
 export default function Button ({ children, color, onPress }) {
@@ -14,12 +14,12 @@ export default function Button ({ children, color, onPress }) {
   ]
 
   return (
-    <View style={styles}>
-      <TouchableWithoutFeedback onPress={onPress}>
+    <View>
+      <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles}>
         <View style={stylesDefault.content}>
           <Text style={stylesFont}>{children}</Text>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   )
 }

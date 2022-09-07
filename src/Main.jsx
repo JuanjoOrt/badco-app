@@ -22,7 +22,8 @@ export default function Main () {
         initialRouteName={sessionInfo.data ? 'Home' : 'Login'}
         screenOptions={{
           headerShown: false,
-          animation: 'none'
+          animation: 'none',
+          gestureEnabled: true
         }}>
         {sessionInfo.isLoading &&
           <Stack.Screen name="Loading" component={EmptyComponent} />
