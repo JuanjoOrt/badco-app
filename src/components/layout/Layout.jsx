@@ -8,6 +8,7 @@ import Footer from './Footer'
 import DismissKeyboard from '../DimissKeyboard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInputSearchOpen } from '../../_rx/user/userSlice'
+import { IS_MOBILE } from '../../constants'
 
 export default function Layout ({ children, style, appBarStyle = 'auto', onPressScreen }) {
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ export default function Layout ({ children, style, appBarStyle = 'auto', onPress
           <View style={styles.body}>
             {children}
           </View>
-          <Footer />
+          {IS_MOBILE && <Footer />}
         </View>
       </View>
     </DismissKeyboard>
@@ -41,11 +42,10 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    height: theme.dimensions.screenHeight,
-    justifyContent: 'space-between'
+    height: theme.dimensions.screenHeight
   },
   body: {
     width: '100%',
-    height: theme.dimensions.screenHeight - theme.dimensions.headerHeight - theme.dimensions.footerHeight
+    height: theme.dimensions.screenHeight - theme.dimensions.headerHeight - (IS_MOBILE ? theme.dimensions.footerHeight : 0)
   }
 })

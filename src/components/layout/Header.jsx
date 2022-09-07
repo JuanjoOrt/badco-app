@@ -1,67 +1,30 @@
 import React from 'react'
 import { Animated, Image, StyleSheet, TextInput, View, TouchableWithoutFeedback } from 'react-native'
 import theme from '../../../theme'
-import { useDispatch, useSelector } from 'react-redux'
-import { setInputSearchOpen } from '../../_rx/user/userSlice'
-import useAnimationHeader from './useAnimationHeader'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Feather } from '@expo/vector-icons'
+import { IS_MOBILE, IS_TABLET } from '../../constants'
 
 export default function Header () {
-  const dispatch = useDispatch()
-  const isInputSearchOpen = useSelector(state => state.user.isInputSearchOpen)
-  const userInfo = useSelector(state => state.user.sessionInfo.data)
-  const { animationOpacity, animationWidth } = useAnimationHeader()
-
-  const handleInputPressed = () => {
-
-    dispatch(setInputSearchOpen(true))
-  }
-
   return (
     <View style={styles.header}>
       <View style={styles.avatar}>
+        { IS_TABLET &&
+          <TouchableWithoutFeedback onPress={() => console.log('HOLIWI')}>
+            <Feather name="menu" color='#4D4D4D' size={30} />
+          </TouchableWithoutFeedback>
+        }
         <Image
           style={styles.image}
           source={{ uri: 'https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg' }}
         />
       </View>
       <View style={styles.title}>
-        <Animated.Text
-          style={{
-            fontSize: 16,
-            opacity: animationOpacity.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0]
-            }),
-            width: isInputSearchOpen ? 0 : animationWidth.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0%', '50%']
-            })
-          }}
-        >
-          Hola {userInfo.name}
-        </Animated.Text>
-        <TouchableWithoutFeedback onPressIn={handleInputPressed}>
-          <Animated.View
-            style={{
-              ...styles.inputContainer,
-              width: animationWidth.interpolate({
-                inputRange: [0, 1],
-                outputRange: [theme.dimensions.screenWidth - 80, 30]
-              })
-            }}
-          >
-            <TextInput
-              style={{
-                ...styles.bar,
-                color: isInputSearchOpen ? 'black' : 'transparent'
-              }}
-            />
+          <Animated.View style={styles.inputContainer} >
+            <TextInput style={styles.bar}/>
             <View style={styles.icon}>
-              <AntDesign name="search1" color='#4D4D4D' size={20} />
+              <AntDesign name="search1" color='#4D4D4D' size={18} />
             </View>
           </Animated.View>
-        </TouchableWithoutFeedback>
       </View>
     </View>
   )
@@ -78,9 +41,10 @@ const styles = StyleSheet.create({
   },
   avatar: {
     height: '100%',
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: IS_MOBILE ? 50 : 80,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   image: {
     width: 40,
@@ -88,11 +52,11 @@ const styles = StyleSheet.create({
     borderRadius: 100
   },
   title: {
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingLeft: 10,
     flexDirection: 'row',
-    width: theme.dimensions.screenWidth - 70
+    width: theme.dimensions.screenWidth - (IS_MOBILE ? 70 : 100)
   },
   inputContainer: {
     position: 'relative',
@@ -102,7 +66,9 @@ const styles = StyleSheet.create({
     height: 30,
     backgroundColor: '#DEDEDE',
     borderRadius: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingRight: 30,
+    width: IS_TABLET ? 300 : theme.dimensions.screenWidth - 80
   },
   icon: {
     position: 'absolute',
