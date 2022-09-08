@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import { StyleSheet, View, Animated, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTabletSidebar } from '../../_rx/user/userSlice'
+import { logOutUser } from '../../_rx/login/loginActions'
 import theme from '../../../theme'
+import Button from '../Button'
 
 export default function TabletBar () {
   const visible = useSelector(state => state.user.tabletSidebar)
@@ -10,6 +12,7 @@ export default function TabletBar () {
   const animationSidebar = useRef(new Animated.Value(-400)).current
   const stylesBackground = [styles.background, visible ? styles.flex : styles.none]
   const stylesSideBar = [styles.sidebar, { left: animationSidebar }]
+  const handleLogOut = () => dispatch(logOutUser)
 
   const handleCloseSidebar = () => dispatch(setTabletSidebar(false))
 
@@ -35,7 +38,9 @@ export default function TabletBar () {
       <TouchableWithoutFeedback onPress={handleCloseSidebar}>
         <View style={stylesBackground} />
       </TouchableWithoutFeedback>
-      <Animated.View style={stylesSideBar} />
+      <Animated.View style={stylesSideBar} >
+        <Button onPress={handleLogOut}>Disconect</Button>
+      </Animated.View>
     </>
   )
 }
