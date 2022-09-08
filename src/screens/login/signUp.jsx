@@ -4,7 +4,8 @@ import { Formik } from 'formik'
 import InputFormik from '../../components/forms/InputFormik'
 import { AntDesign } from '@expo/vector-icons'
 import Button from '../../components/Button'
-import useAuth from '../../hooks/useAuth'
+import { useDispatch } from 'react-redux'
+import { createUser } from '../../_rx/login/loginActions'
 
 const initialValues = {
   email: '',
@@ -14,11 +15,11 @@ const initialValues = {
 
 export default function SignUp () {
   const [isLoading, setIsLoading] = useState(false)
-  const { createUser } = useAuth()
+  const dispatch = useDispatch()
 
   const handleSubmit = (values) => {
     setIsLoading(true)
-    createUser({ userMail: values.email.toLowerCase(), name: values.userName, ...values })
+    dispatch((dispatch) => createUser(dispatch, { userMail: values.email.toLowerCase(), name: values.userName, ...values }))
       .catch(error => {
         console.error(error)
         setIsLoading(false)

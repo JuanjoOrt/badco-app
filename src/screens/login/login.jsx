@@ -4,7 +4,8 @@ import Button from '../../components/Button'
 import { AntDesign } from '@expo/vector-icons'
 import InputFormik from '../../components/forms/InputFormik'
 import { Formik } from 'formik'
-import useAuth from '../../hooks/useAuth'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../_rx/login/loginActions'
 
 const initialValues = {
   email: '',
@@ -12,12 +13,12 @@ const initialValues = {
 }
 
 export default function Login () {
-  const { loginUser } = useAuth()
+  const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = (values) => {
     setIsLoading(true)
-    loginUser({ userMail: values.email.toLowerCase(), password: values.password })
+    dispatch(dispatch => loginUser(dispatch, { userMail: values.email.toLowerCase(), password: values.password }))
       .catch(error => {
         setIsLoading(false)
         console.error(error)

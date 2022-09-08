@@ -3,17 +3,17 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LoginHome from './screens/login/loginHome'
 import Home from './screens/home/home'
-import useAuth from './hooks/useAuth'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import EmptyComponent from './components/EmptyComponent'
+import { checkSessionAvailable } from './_rx/login/loginActions'
 const Stack = createNativeStackNavigator()
 
 export default function Main () {
-  const { checkSessionAvailable } = useAuth()
+  const dispatch = useDispatch()
   const sessionInfo = useSelector(({ user }) => user.sessionInfo)
 
   useEffect(() => {
-    checkSessionAvailable()
+    dispatch(checkSessionAvailable)
   }, [])
 
   return (
