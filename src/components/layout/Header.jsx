@@ -3,13 +3,18 @@ import { Animated, Image, StyleSheet, TextInput, View, TouchableWithoutFeedback 
 import theme from '../../../theme'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import { IS_MOBILE, IS_TABLET } from '../../constants'
+import { useDispatch } from 'react-redux'
+import { setTabletSidebar } from '../../_rx/user/userSlice'
 
 export default function Header () {
+  const dispatch = useDispatch()
+  const handleTabletMenu = () => dispatch(setTabletSidebar(true))
+
   return (
     <View style={styles.header}>
       <View style={styles.avatar}>
         { IS_TABLET &&
-          <TouchableWithoutFeedback onPress={() => console.log('HOLIWI')}>
+          <TouchableWithoutFeedback onPress={handleTabletMenu}>
             <Feather name="menu" color='#4D4D4D' size={30} />
           </TouchableWithoutFeedback>
         }

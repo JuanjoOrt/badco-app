@@ -15,7 +15,7 @@ export default function Button ({ children, color, onPress, isLoading }) {
     stylesDefault.font,
     color === 'primary' && stylesDefault.font.primary,
     { display: isLoading ? 'none' : 'flex' }
-]
+  ]
 
   const handlePress = () => {
     if (onPress && !isLoading) onPress()

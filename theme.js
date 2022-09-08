@@ -11,8 +11,10 @@ export default {
     primary: '#8379C7FF'
   },
   dimensions: {
-    screenHeight: Dimensions.get('screen').height - Constants.statusBarHeight,
+    statusBarHeight: Constants.statusBarHeight,
+    screenHeight: Dimensions.get('screen').height,
     screenWidth: Dimensions.get('screen').width,
+    screenHeightWithOutStatusBar: Dimensions.get('screen').height - Constants.statusBarHeight,
     headerHeight: 70,
     footerHeight: 70
   }
