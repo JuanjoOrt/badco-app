@@ -10,8 +10,9 @@ export default function TabletBar () {
   const visible = useSelector(state => state.user.tabletSidebar)
   const dispatch = useDispatch()
   const animationSidebar = useRef(new Animated.Value(-400)).current
+  const animationOpacity = useRef(new Animated.Value(0)).current
   const stylesBackground = [styles.background, visible ? styles.flex : styles.none]
-  const stylesSideBar = [styles.sidebar, { left: animationSidebar }]
+  const stylesSideBar = [styles.sidebar, { left: animationSidebar, opacity: animationOpacity }]
   const handleLogOut = () => dispatch(logOutUser)
 
   const handleCloseSidebar = () => dispatch(setTabletSidebar(false))
@@ -19,6 +20,11 @@ export default function TabletBar () {
   useEffect(() => {
     if (visible) {
       Keyboard.dismiss()
+      Animated.timing(animationOpacity, {
+        toValue: 1,
+        duration: 1,
+        useNativeDriver: false
+      }).start()
       Animated.timing(animationSidebar, {
         toValue: 0,
         duration: 200,
@@ -28,6 +34,12 @@ export default function TabletBar () {
       Animated.timing(animationSidebar, {
         toValue: -400,
         duration: 200,
+        useNativeDriver: false
+      }).start()
+      Animated.timing(animationOpacity, {
+        toValue: 0,
+        duration: 1,
+        delay: 200,
         useNativeDriver: false
       }).start()
     }

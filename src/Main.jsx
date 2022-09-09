@@ -9,7 +9,8 @@ import ShoppingCart from './screens/shoppingCart/shoppingCart'
 import { useDispatch, useSelector } from 'react-redux'
 import EmptyComponent from './components/EmptyComponent'
 import { checkSessionAvailable } from './_rx/login/loginActions'
-import { VIEW_HOME, VIEW_HISTORY, VIEW_SHOP, VIEW_SHOPPING_CART } from './constants'
+import { VIEW_HOME, VIEW_HISTORY, VIEW_SHOP, VIEW_SHOPPING_CART, VIEW_HOME_COMMUNICATION_DETAIL } from './constants'
+import CommunicationDetail from './screens/home/detail'
 const Stack = createNativeStackNavigator()
 
 export default function Main () {
@@ -27,7 +28,8 @@ export default function Main () {
         screenOptions={{
           headerShown: false,
           animation: 'none',
-          gestureEnabled: true
+          gestureEnabled: true,
+          customAnimationOnGesture: false
         }}>
         {sessionInfo.isLoading &&
           <Stack.Screen name="Loading" component={EmptyComponent} />
@@ -38,6 +40,7 @@ export default function Main () {
         { sessionInfo.data && !sessionInfo.isLoading &&
           <>
             <Stack.Screen name={VIEW_HOME} component={Home} />
+            <Stack.Screen name={VIEW_HOME_COMMUNICATION_DETAIL} component={CommunicationDetail} />
             <Stack.Screen name={VIEW_SHOP} component={Shop} />
             <Stack.Screen name={VIEW_HISTORY} component={History} />
             <Stack.Screen name={VIEW_SHOPPING_CART} component={ShoppingCart} />
