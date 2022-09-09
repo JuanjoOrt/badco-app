@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, Image, StyleSheet, TextInput, View, TouchableWithoutFeedback } from 'react-native'
+import { Animated, Image, StyleSheet, TextInput, View, TouchableWithoutFeedback, ScrollView } from 'react-native'
 import theme from '../../../theme'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import { IS_MOBILE, IS_TABLET } from '../../constants'
@@ -24,12 +24,16 @@ export default function Header () {
         />
       </View>
       <View style={styles.title}>
-          <Animated.View style={styles.inputContainer} >
-            <TextInput style={styles.bar}/>
-            <View style={styles.icon}>
-              <AntDesign name="search1" color='#4D4D4D' size={18} />
+        <View>
+          <ScrollView>
+            <View style={styles.inputContainer} >
+              <TextInput style={styles.bar}/>
+              <View style={styles.icon}>
+                <AntDesign name="search1" color='#4D4D4D' size={18} />
+              </View>
             </View>
-          </Animated.View>
+          </ScrollView>
+        </View>
       </View>
     </View>
   )
