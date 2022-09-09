@@ -11,17 +11,8 @@ import { setInputSearchOpen } from '../../_rx/user/userSlice'
 import { IS_MOBILE } from '../../constants'
 import TabletBar from './TabletBar'
 
-export default function Layout ({ children, style, appBarStyle = 'auto', onPressScreen }) {
-  const dispatch = useDispatch()
-  const userInfo = useSelector(state => state.user)
-
-  const handleOnPress = () => {
-    if (userInfo.isInputSearchOpen) dispatch(setInputSearchOpen(false))
-    onPressScreen && onPressScreen()
-  }
-
+export default function Layout ({ children, style, appBarStyle = 'auto' }) {
   return (
-    <DismissKeyboard onPress={handleOnPress}>
       <View style={styles.container }>
         <TabletBar />
         <StatusBar style={appBarStyle} />
@@ -33,10 +24,9 @@ export default function Layout ({ children, style, appBarStyle = 'auto', onPress
           {IS_MOBILE && <Footer />}
         </View>
       </View>
-    </DismissKeyboard>
   )
 }
-console.log(theme.dimensions.screenHeightWithOutStatusBar - theme.dimensions.headerHeight - (IS_MOBILE ? theme.dimensions.footerHeight : 0))
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,

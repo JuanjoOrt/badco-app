@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     height: theme.dimensions.footerHeight,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#eaeaea'
+    backgroundColor: '#eaeaea',
   },
   menuOption: {
     width: 50,
