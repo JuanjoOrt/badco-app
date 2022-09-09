@@ -36,7 +36,7 @@ export default function Layout ({ children, style, appBarStyle = 'auto', onPress
     </DismissKeyboard>
   )
 }
-
+console.log(theme.dimensions.screenHeightWithOutStatusBar - theme.dimensions.headerHeight - (IS_MOBILE ? theme.dimensions.footerHeight : 0))
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
