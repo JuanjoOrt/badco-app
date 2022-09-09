@@ -12,10 +12,10 @@ export default {
   },
   dimensions: {
     statusBarHeight: Constants.statusBarHeight,
-    screenHeight: Dimensions.get('screen').height,
-    screenWidth: Dimensions.get('screen').width,
-    screenHeightWithOutStatusBar: Dimensions.get('screen').height - Constants.statusBarHeight,
+    screenHeight: Dimensions.get('window').height,
+    screenWidth: Dimensions.get('window').width,
+    screenHeightWithOutStatusBar: Dimensions.get('window').height - Constants.statusBarHeight,
     headerHeight: 70,
-    footerHeight: 70
+    footerHeight: 65
   }
 }
