@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, Image, StyleSheet, TextInput, View, TouchableWithoutFeedback, ScrollView } from 'react-native'
+import { Image, StyleSheet, TextInput, View, TouchableWithoutFeedback, ScrollView } from 'react-native'
 import theme from '../../../theme'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import { IS_MOBILE, IS_TABLET } from '../../constants'
