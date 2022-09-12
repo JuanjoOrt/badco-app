@@ -6,8 +6,7 @@ const initialState = {
     isLoading: false,
     error: null
   },
-  isInputSearchOpen: false,
-  tabletSidebar: false
+  isInputSearchOpen: false
 }
 
 export const userSlice = createSlice({
@@ -25,13 +24,10 @@ export const userSlice = createSlice({
     },
     setInputSearchOpen: (state, action) => {
       state.isInputSearchOpen = action.payload
-    },
-    setTabletSidebar: (state, action) => {
-      state.tabletSidebar = action.payload
     }
   }
 })
 
-export const { setSessionData, setSessionLoading, setSessionError, setInputSearchOpen, setTabletSidebar } = userSlice.actions
+export const { setSessionData, setSessionLoading, setSessionError, setInputSearchOpen } = userSlice.actions
 
 export default userSlice.reducer

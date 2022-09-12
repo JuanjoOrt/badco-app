@@ -1,4 +1,4 @@
-import { setSessionData, setSessionError, setSessionLoading, setTabletSidebar } from '../user/userSlice'
+import { setSessionData, setSessionError, setSessionLoading } from '../user/userSlice'
 import { getUserLoginInfo, postNewUser, postUserLogin } from '../../_services/authService'
 import { getItem, removeItem, setItem } from '../../utils/asyncStorage'
 import { setViewStatus } from './loginSlice'
@@ -42,5 +42,4 @@ export const logOutUser = async (dispatch) => {
   await removeItem('@token')
   dispatch(setSessionData(null))
   dispatch(setViewStatus(VIEW_LOGIN_HOME))
-  dispatch(setTabletSidebar(false))
 }
