@@ -3,18 +3,16 @@ import { Image, StyleSheet, TextInput, View, TouchableWithoutFeedback, ScrollVie
 import theme from '../../../theme'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import { IS_MOBILE, IS_TABLET } from '../../constants'
-import { useDispatch } from 'react-redux'
-import { setTabletSidebar } from '../../_rx/user/userSlice'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Header () {
-  const dispatch = useDispatch()
-  const handleTabletMenu = () => dispatch(setTabletSidebar(true))
+  const navigation = useNavigation()
 
   return (
     <View style={styles.header}>
       <View style={styles.avatar}>
         { IS_TABLET &&
-          <TouchableWithoutFeedback onPress={handleTabletMenu}>
+          <TouchableWithoutFeedback onPress={() => navigation.toggleDrawer()}>
             <Feather name="menu" color='#4D4D4D' size={30} />
           </TouchableWithoutFeedback>
         }

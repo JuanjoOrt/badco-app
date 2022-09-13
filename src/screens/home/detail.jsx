@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import LayoutContent from '../../components/layout/LayoutContent'
 import Layout from '../../components/layout/Layout'

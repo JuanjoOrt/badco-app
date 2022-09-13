@@ -8,6 +8,7 @@ export const IS_TABLET = Dimensions.get('screen').width >= 500
 export const IS_MOBILE = !IS_TABLET
 
 export const VIEW_HOME = 'Home'
+export const VIEW_HOME_TAB = 'HomeTab'
 export const VIEW_HOME_COMMUNICATION_DETAIL = 'Home-communication-detail'
 export const VIEW_SHOP = 'Shop'
 export const VIEW_HISTORY = 'History'
