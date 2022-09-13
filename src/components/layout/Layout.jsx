@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   body: {
     width: '100%',
-    height: theme.dimensions.screenHeightWithOutStatusBar - theme.dimensions.headerHeight,
-    paddingBottom: 50
+    height: theme.dimensions.screenHeightWithOutStatusBar - theme.dimensions.headerHeight
   }
 })

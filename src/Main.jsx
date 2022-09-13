@@ -48,7 +48,13 @@ export default function Main () {
               <Tab.Screen name={VIEW_HISTORY} component={History} />
               <Tab.Screen name={VIEW_SHOPPING_CART} component={ShoppingCart} />
             </Tab.Navigator>
-          : <Drawer.Navigator initialRouteName={VIEW_HOME_TAB}>
+          : <Drawer.Navigator
+              screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarShowLabel: false
+              })}
+              useLegacyImplementation initialRouteName={VIEW_HOME_TAB}
+              >
               <Drawer.Screen name={VIEW_HOME_TAB} component={HomeRoutes} />
               <Drawer.Screen name={VIEW_SHOP} component={Shop} />
               <Drawer.Screen name={VIEW_HISTORY} component={History} />
@@ -56,7 +62,6 @@ export default function Main () {
             </Drawer.Navigator>
         }
       </>
-
       }
     </NavigationContainer>
   )

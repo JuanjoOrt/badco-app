@@ -3,14 +3,16 @@ import { Image, StyleSheet, TextInput, View, TouchableWithoutFeedback, ScrollVie
 import theme from '../../../theme'
 import { AntDesign, Feather } from '@expo/vector-icons'
 import { IS_MOBILE, IS_TABLET } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Header () {
+  const navigation = useNavigation()
 
   return (
     <View style={styles.header}>
       <View style={styles.avatar}>
         { IS_TABLET &&
-          <TouchableWithoutFeedback onPress={() => console.log('holiwi')}>
+          <TouchableWithoutFeedback onPress={() => navigation.toggleDrawer()}>
             <Feather name="menu" color='#4D4D4D' size={30} />
           </TouchableWithoutFeedback>
         }
