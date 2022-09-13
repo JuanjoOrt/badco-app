@@ -13,6 +13,7 @@ import { checkSessionAvailable } from './_rx/login/loginActions'
 import { VIEW_HISTORY, VIEW_SHOP, VIEW_SHOPPING_CART, VIEW_HOME_TAB, IS_MOBILE } from './constants'
 import IconTab from './components/layout/IconTab'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
+import DrawerComponent from './components/layout/Drawer'
 const Tab = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
@@ -49,10 +50,12 @@ export default function Main () {
               <Tab.Screen name={VIEW_SHOPPING_CART} component={ShoppingCart} />
             </Tab.Navigator>
           : <Drawer.Navigator
-              screenOptions={({ route }) => ({
+              screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false
-              })}
+              }}
+              gestureEnabled={false}
+              drawerContent={DrawerComponent}
               useLegacyImplementation initialRouteName={VIEW_HOME_TAB}
               >
               <Drawer.Screen name={VIEW_HOME_TAB} component={HomeRoutes} />
