@@ -4,7 +4,9 @@ import { VIEW_SHOP_PRODUCT_DETAIL } from '../../../constants'
 
 export default function ProductList ({ product }) {
   const navigation = useNavigation()
-  const handleOnPress = () => navigation.navigate(VIEW_SHOP_PRODUCT_DETAIL)
+  const handleOnPress = () => navigation.navigate(VIEW_SHOP_PRODUCT_DETAIL, {
+    productId: product.id
+  })
   return (
     <TouchableWithoutFeedback onPress={handleOnPress}>
       <View style={styles.container}>
@@ -28,17 +30,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   image: {
-    width: 200,
+    width: '40%',
     height: '100%'
   },
   textContainer: {
-    paddingLeft: 20
+    paddingLeft: 20,
+    width: '60%'
   },
   name: {
     fontSize: 20
   },
   price: {
-    fontSize: 18,
+    fontSize: 16,
     paddingTop: 15,
     fontWeight: 'bold'
   }

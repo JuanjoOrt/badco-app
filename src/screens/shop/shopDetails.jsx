@@ -1,6 +1,13 @@
 import { Text, View } from 'react-native'
+import { useEffect } from 'react'
 
-export default function ShopDetails () {
+export default function ShopDetails ({ route }) {
+  const productId = route.params.productId
+
+  useEffect(() => {
+    console.log(productId)
+  }, [])
+
   return (
     <View>
       <Text>

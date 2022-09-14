@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native'
 import theme from '../../../theme'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import { VIEW_HISTORY, VIEW_HOME, VIEW_SHOP, VIEW_SHOPPING_CART } from '../../constants'
+import { VIEW_HISTORY, VIEW_HOME, VIEW_SHOP_TAB, VIEW_SHOPPING_CART } from '../../constants'
 
 const DrawerItem = ({ icon, label, route }) => {
   const navigation = useNavigation()
@@ -27,7 +27,7 @@ export default function Drawer () {
       </View>
       <View style={styles.content}>
         <DrawerItem label='Comunicados' icon={<Feather name='home' size={24} />} route={VIEW_HOME}/>
-        <DrawerItem label='Tienda' icon={<MaterialCommunityIcons name='tshirt-crew-outline' size={26} />} route={VIEW_SHOP}/>
+        <DrawerItem label='Tienda' icon={<MaterialCommunityIcons name='tshirt-crew-outline' size={26} />} route={VIEW_SHOP_TAB}/>
         <DrawerItem label='Pedidos' icon={<Feather name='list' size={26} />} route={VIEW_HISTORY}/>
         <DrawerItem label='Carrito' icon={<Feather name='shopping-cart' size={24} />} route={VIEW_SHOPPING_CART}/>
       </View>
