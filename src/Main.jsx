@@ -14,6 +14,7 @@ import { VIEW_HISTORY, VIEW_SHOP, VIEW_SHOPPING_CART, VIEW_HOME_TAB, IS_MOBILE }
 import IconTab from './components/layout/IconTab'
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import DrawerComponent from './components/layout/Drawer'
+import Header from './components/layout/Header'
 const Tab = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
@@ -41,7 +42,8 @@ export default function Main () {
           ? <Tab.Navigator
               screenOptions={({ route }) => ({
                 tabBarShowLabel: false,
-                tabBarIcon: () => tabBarIcon[route.name]
+                tabBarIcon: () => tabBarIcon[route.name],
+                header: () => <Header />
               })}>
               <Tab.Screen name={VIEW_HOME_TAB} component={HomeRoutes} />
               <Tab.Screen name={VIEW_SHOP} component={Shop} />
@@ -50,7 +52,8 @@ export default function Main () {
             </Tab.Navigator>
           : <Drawer.Navigator
               screenOptions={{
-                swipeEnabled: false
+                swipeEnabled: false,
+                header: () => <Header />
               }}
               drawerContent={DrawerComponent}
               useLegacyImplementation initialRouteName={VIEW_HOME_TAB}
