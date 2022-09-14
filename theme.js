@@ -15,7 +15,8 @@ export default {
     screenHeight: Dimensions.get('window').height,
     screenWidth: Dimensions.get('window').width,
     screenHeightWithOutStatusBar: Dimensions.get('window').height - Constants.statusBarHeight,
-    headerHeight: 70,
-    footerHeight: 65
+    headerHeight: 64,
+    bottomNavbarHeight: 48,
+    mobileDeviceBarsHeight: 64 + 48
   }
 }

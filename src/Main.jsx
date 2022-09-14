@@ -40,7 +40,6 @@ export default function Main () {
         { IS_MOBILE
           ? <Tab.Navigator
               screenOptions={({ route }) => ({
-                headerShown: false,
                 tabBarShowLabel: false,
                 tabBarIcon: () => tabBarIcon[route.name]
               })}>
@@ -51,10 +50,8 @@ export default function Main () {
             </Tab.Navigator>
           : <Drawer.Navigator
               screenOptions={{
-                headerShown: false,
-                tabBarShowLabel: false
+                swipeEnabled: false
               }}
-              gestureEnabled={false}
               drawerContent={DrawerComponent}
               useLegacyImplementation initialRouteName={VIEW_HOME_TAB}
               >

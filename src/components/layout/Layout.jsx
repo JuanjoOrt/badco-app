@@ -1,13 +1,12 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, View } from 'react-native'
-import Header from './Header'
 import theme from '../../../theme'
+import { IS_MOBILE } from '../../constants'
 
-export default function Layout ({ children, style, appBarStyle = 'auto' }) {
+export default function Layout ({ children, style }) {
   return (
       <SafeAreaView >
         <View style={[styles.content, style]}>
-          <Header />
           <View style={styles.body}>
             {children}
           </View>
@@ -18,11 +17,10 @@ export default function Layout ({ children, style, appBarStyle = 'auto' }) {
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
-    height: theme.dimensions.screenHeightWithOutStatusBar
+    flex: 1
   },
   body: {
     width: '100%',
-    height: theme.dimensions.screenHeightWithOutStatusBar - theme.dimensions.headerHeight
+    height: theme.dimensions.screenHeightWithOutStatusBar - (IS_MOBILE ? theme.dimensions.mobileDeviceBarsHeight : theme.dimensions.headerHeight)
   }
 })
