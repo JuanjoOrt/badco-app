@@ -4,6 +4,7 @@ import Layout from '../../components/layout/Layout'
 import LayoutContent from '../../components/layout/LayoutContent'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../_rx/shop/shopAction'
+import ProductList from './components/ProductList'
 
 export default function Home () {
   const dispatch = useDispatch()
@@ -21,8 +22,7 @@ export default function Home () {
     <Layout>
       <LayoutContent>
         {isLoading && <Text>Loading...</Text>}
-        {console.log(data)}
-        <Text>Hola</Text>
+        {data?.map(product => <ProductList key={product.id} product={product}/>)}
       </LayoutContent>
     </Layout>
   )
