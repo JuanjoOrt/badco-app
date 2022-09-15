@@ -5,7 +5,8 @@ const initialState = {
     data: null,
     error: null,
     isLoading: false
-  }
+  },
+  shoppingCart: []
 }
 
 export const shopSlice = createSlice({
@@ -20,10 +21,13 @@ export const shopSlice = createSlice({
     },
     setProductsIsLoading: (state, action) => {
       state.products.isLoading = action.payload
+    },
+    setShoppingCart: (state, action) => {
+      state.shoppingCart = action.payload
     }
   }
 })
 
-export const { setProductsData, setProductsError, setProductsIsLoading } = shopSlice.actions
+export const { setProductsData, setProductsError, setProductsIsLoading, setShoppingCart } = shopSlice.actions
 
 export default shopSlice.reducer

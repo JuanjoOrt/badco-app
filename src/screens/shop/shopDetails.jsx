@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getProductDetails } from '../../_services/shopService'
 import LayoutContent from '../../components/layout/LayoutContent'
 import Gallery from '../../components/Gallery'
 import SizeCard from '../../components/SizeCard'
 import Button from '../../components/Button'
+import { setShoppingCart } from '../../_rx/shop/shopSlice'
 
 export default function ShopDetails ({ route }) {
+  const shoppingCart = useSelector(state => state.shop.shoppingCart)
+  const dispatch = useDispatch()
   const productId = route.params.productId
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -23,6 +27,14 @@ export default function ShopDetails ({ route }) {
   const handleSize = (size) => setSizeSelected(size)
   const handleAddShoppingCart = () => {
     const item = { id: data.id, price: data.price, size: sizeSelected, image: data.image, name: data.name }
+    const itemFounded = shoppingCart.find(shoppingCartItem => shoppingCartItem.id === item.id && shoppingCartItem.size === item.size)
+    if (itemFounded) {
+      itemFounded.count = itemFounded.count + 1
+      dispatch(setShoppingCart([...shoppingCart]))
+    } else {
+      item.count = 1
+      dispatch(setShoppingCart([...shoppingCart, item]))
+    }
   }
 
   return (
@@ -44,7 +56,7 @@ export default function ShopDetails ({ route }) {
               )}
             </View>
             <View style={styles.buttonContainer}>
-              <Button color='primary' disabled={!sizeSelected}>Añadir al carrito</Button>
+              <Button color='primary' disabled={!sizeSelected} onPress={handleAddShoppingCart}>Añadir al carrito</Button>
             </View>
           </View>
         </View>
