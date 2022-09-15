@@ -8,7 +8,8 @@ export default {
     }
   },
   color: {
-    primary: '#8379C7FF'
+    primary: '#8379C7FF',
+    disabledPrimary: '#aaa4cb'
   },
   dimensions: {
     statusBarHeight: Constants.statusBarHeight,

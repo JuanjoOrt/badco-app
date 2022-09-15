@@ -1,4 +1,4 @@
-import { setProductsData, setProductsError, setProductsIsLoading } from '../shop/shopSlice'
+import { setProductsData, setProductsError, setProductsIsLoading } from './shopSlice'
 import { getProducts } from '../../_services/shopService'
 
 export const fetchProducts = async (dispatch) => {

@@ -4,11 +4,12 @@ import theme from '../../theme'
 import { AntDesign } from '@expo/vector-icons'
 import useAnimation from '../hooks/useAnimation'
 
-export default function Button ({ children, color, onPress, isLoading }) {
+export default function Button ({ children, color, onPress, isLoading, disabled }) {
   const [animation, animationInterpolate] = useAnimation('0deg', '360deg')
   const styles = [
     stylesDefault.button,
-    color === 'primary' && stylesDefault.button.primary
+    color === 'primary' && stylesDefault.button.primary,
+    disabled && stylesDefault.button.disabled
   ]
 
   const stylesFont = [
@@ -30,7 +31,7 @@ export default function Button ({ children, color, onPress, isLoading }) {
 
   return (
     <View>
-      <TouchableOpacity onPress={handlePress} activeOpacity={0.8} style={styles}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.8} style={styles} disabled={disabled}>
         <View style={stylesDefault.content}>
           <Animated.View
             style={{
@@ -52,7 +53,8 @@ const stylesDefault = StyleSheet.create({
     borderRadius: 4,
     width: '100%',
 
-    primary: { backgroundColor: theme.color.primary }
+    primary: { backgroundColor: theme.color.primary },
+    disabled: { backgroundColor: theme.color.disabledPrimary }
   },
   content: {
     width: '100%',
