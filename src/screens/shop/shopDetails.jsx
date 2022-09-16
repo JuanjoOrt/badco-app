@@ -55,7 +55,7 @@ export default function ShopDetails ({ route }) {
       {loading && <Text>Loading...</Text>}
       {data && (
         <View>
-          <Gallery photos={data.imageGallery} />
+         <Gallery photos={data.imageGallery} />
           <View style={styles.content}>
             <Text style={styles.title}>{ data.name }</Text>
             <Text style={styles.description}>{ data.description }</Text>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   title: {
-    fontSize: '24',
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20
   },

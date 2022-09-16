@@ -18,14 +18,14 @@ export default function Gallery ({ photos = [] }) {
         {showLeftArrow &&
           <TouchableWithoutFeedback onPress={handleLeftOption}>
             <View style={{ ...styles.arrow, ...styles.left }}>
-              <AntDesign name='caretleft' size='30'/>
+              <AntDesign name='caretleft' size={30}/>
             </View>
           </TouchableWithoutFeedback>
         }
         {showRightArrow &&
           <TouchableWithoutFeedback onPress={handleRightOption}>
             <View style={{ ...styles.arrow, ...styles.right }}>
-              <AntDesign name='caretright' size='30'/>
+              <AntDesign name='caretright' size={30}/>
             </View>
           </TouchableWithoutFeedback>
         }
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: '.5'
+    opacity: 0.5
   },
   left: {
     left: 0
