@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Button from '../../components/Button'
 import { AntDesign } from '@expo/vector-icons'
 import InputFormik from '../../components/forms/InputFormik'
@@ -15,13 +15,17 @@ const initialValues = {
 export default function Login () {
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { setFieldError }) => {
     setIsLoading(true)
     dispatch(dispatch => loginUser(dispatch, { userMail: values.email.toLowerCase(), password: values.password }))
       .catch(error => {
         setIsLoading(false)
-        console.error(error)
+        const errorMessage = error.message
+        const errorField = error.payload.param
+        if (errorField !== 'field_value') setFieldError(errorField, errorMessage)
+        if (!errorField) setError(errorMessage)
       })
   }
 
@@ -45,6 +49,7 @@ export default function Login () {
               secureTextEntry
             />
           </View>
+          {error && <Text style={styles.errorText}>{error}</Text>}
           <View style={styles.container.button}>
             <Button color='primary' onPress={handleSubmit} isLoading={isLoading}>Log in</Button>
           </View>
@@ -63,5 +68,10 @@ const styles = StyleSheet.create({
     button: {
       marginTop: 15
     }
+  },
+  errorText: {
+    color: '#bb2424',
+    fontWeight: 'bold',
+    marginBottom: 10
   }
 })

@@ -29,8 +29,13 @@ export default function ShopDetails ({ route }) {
     const item = { id: data.id, price: data.price, size: sizeSelected, image: data.image, name: data.name }
     const itemFounded = shoppingCart.find(shoppingCartItem => shoppingCartItem.id === item.id && shoppingCartItem.size === item.size)
     if (itemFounded) {
-      itemFounded.count = itemFounded.count + 1
-      dispatch(setShoppingCart([...shoppingCart]))
+      const countPlus = itemFounded.count + 1
+      const newItem = { ...itemFounded, count: countPlus }
+      const preparingBuy = shoppingCart.filter(shoppingCartItem => shoppingCartItem.size !== newItem.size && shoppingCartItem.id !== item.id )
+      console.log(preparingBuy)
+      /*const allItems = [...preparingBuy, newItem]
+      console.log(allItems)
+      dispatch(setShoppingCart(allItems))*/
     } else {
       item.count = 1
       dispatch(setShoppingCart([...shoppingCart, item]))

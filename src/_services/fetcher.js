@@ -9,6 +9,6 @@ export default async function fetcher ({ method, url, body, auth }) {
     method,
     body: JSON.stringify(body)
   })
-  if (!response.ok) throw new Error(response.statusText)
+  if (!response.ok) throw await response.json()
   return response.json()
 }

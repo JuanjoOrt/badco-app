@@ -1,20 +1,28 @@
 import React from 'react'
-import { useField } from 'formik'
+import { useField, useFormikContext } from 'formik'
 import Input from './Input'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default function InputFormik ({ name, required, validate, ...rest }) {
+  const { submitCount } = useFormikContext()
   const validation = (required && !validate) ? validateRequired : validate
-  const [field,, helpers] = useField({ name, validate: validation, ...rest })
+  const [field, meta, helpers] = useField({ name, validate: validation, ...rest })
+  const showError = submitCount > 0 && meta.error
   const handleChange = (newValue) => helpers.setValue(newValue)
 
-  return <Input
-    placeholder={rest.placeholder}
-    icon={rest.icon}
-    value={field.value}
-    name={field.name}
-    onChangeText={handleChange}
-    {...rest}
-  />
+  return (
+    <View>
+      <Input
+        placeholder={rest.placeholder}
+        icon={rest.icon}
+        value={field.value}
+        name={field.name}
+        onChangeText={handleChange}
+        {...rest}
+      />
+      { showError && <Text style={styles.errorText}>{meta.error}</Text>}
+    </View>
+  )
 }
 
 export const validateRequired = (value) => {
@@ -24,3 +32,11 @@ export const validateRequired = (value) => {
   }
   return error
 }
+
+const styles = StyleSheet.create({
+  errorText: {
+    color: '#bb2424',
+    fontWeight: 'bold',
+    marginBottom: 10
+  }
+})
