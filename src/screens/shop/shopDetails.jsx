@@ -8,6 +8,16 @@ import SizeCard from '../../components/SizeCard'
 import Button from '../../components/Button'
 import { setShoppingCart } from '../../_rx/shop/shopSlice'
 
+const filterShopCart = (shoppingCartItem, itemFounded) => {
+  if (shoppingCartItem.id === itemFounded.id) {
+    if (shoppingCartItem.size !== itemFounded.size) {
+      return shoppingCartItem
+    }
+  } else {
+    return shoppingCartItem
+  }
+}
+
 export default function ShopDetails ({ route }) {
   const shoppingCart = useSelector(state => state.shop.shoppingCart)
   const dispatch = useDispatch()
@@ -31,11 +41,9 @@ export default function ShopDetails ({ route }) {
     if (itemFounded) {
       const countPlus = itemFounded.count + 1
       const newItem = { ...itemFounded, count: countPlus }
-      const preparingBuy = shoppingCart.filter(shoppingCartItem => shoppingCartItem.size !== newItem.size && shoppingCartItem.id !== item.id )
-      console.log(preparingBuy)
-      /*const allItems = [...preparingBuy, newItem]
-      console.log(allItems)
-      dispatch(setShoppingCart(allItems))*/
+      const preparingNextCart = shoppingCart.filter((shoppingCartItem) => filterShopCart(shoppingCartItem, itemFounded))
+      const allItems = [...preparingNextCart, newItem]
+      dispatch(setShoppingCart(allItems))
     } else {
       item.count = 1
       dispatch(setShoppingCart([...shoppingCart, item]))
